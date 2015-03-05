@@ -1,20 +1,8 @@
 <div class="row">
   <div class="one-half column">
     <ul class="task-list">
-      <% @tasks.each do |task|
-          klass = if task.completed?
-            'completed'
-          else
-            'incomplete'
-          end
-      %>
-        <li class="task <%= klass %>" id="task-<%= task.id %>">
-          <span class="name"><%= task.name %></span>
-          <%= form_for(task) do |f| %>
-            <%= f.hidden_field :completed, value: !task.completed %>
-            <%= f.submit 'Update', class: 'button' %>
-          <% end %>
-        </li>
+      <% @tasks.each do |task| %>
+        <%= render task %>
       <% end %>
     </ul>
   </div>

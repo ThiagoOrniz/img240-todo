@@ -13,19 +13,26 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    if @task.save
-      redirect_to root_url, notice: 'Created task'
-    else
-      render 'new'
+    respond_to do |format|
+      if @task.save
+        format.js { }
+        format.html { redirect_to root_url, notice: 'Created task' }
+      else
+        format.js { }
+        format.html { render 'new' }
+      end
     end
   end
 
   def update
-    @task.update(task_params)
-    if @task.save
-      redirect_to root_url, notice: 'Updated task'
-    else
-      render 'edit'
+    respond_to do |format|
+      if @task.update(task_params)
+        format.js { }
+        format.html { redirect_to root_url, notice: 'Updated task' }
+      else
+        format.js { }
+        format.html { render 'edit' }
+      end
     end
   end
 
